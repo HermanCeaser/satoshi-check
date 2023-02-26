@@ -1,4 +1,4 @@
-const viteIcon = require("./src/assets/vite.svg") 
+const viteIcon = require("./src/assets/vite.svg")
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}",],
