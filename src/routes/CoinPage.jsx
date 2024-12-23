@@ -20,7 +20,7 @@ const CoinPage = () => {
   }, [url]);
 
   return (
-    <div className="rounded-div my-12 py-8">
+    <div className="my-16 container rounded-lg border py-10 px-8 shadow-md">
       <div className="flex py-8">
         <img className="w-20 mr-8" src={coin.image?.large} alt="/" />
         <div>
@@ -88,7 +88,7 @@ const CoinPage = () => {
             </div>
             <div>
               <p className="text-gray-500 text-sm">Trust Score</p>
-              {coin.tickers ? <p>{coin.liquidity_score.toFixed(2)}</p> : null}
+              {coin.tickers ? <p>{coin.liquidity_score?.toFixed(2)}</p> : null}
             </div>
           </div>
 

@@ -47,7 +47,7 @@ const SignIn = () => {
           <button className="w-full my-2 p-3 bg-button text-buttonText rounded-2xl shadow-cl">Sign In</button>
         </form>
 
-        <p className="my-4">Don't Have an Account ? <Link className="text-accent" to = "/signup">Sign Up</Link> </p>
+        <p className="my-4">Don't Have an Account ? <Link className="text-accent" to = "/signUp">Sign Up</Link> </p>
 
       </div>{" "}
     </div>

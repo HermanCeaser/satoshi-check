@@ -4,7 +4,7 @@ import axios from 'axios';
 import { motion } from 'framer-motion';
 import { Loader } from './Loader';
 
-const Trending = () => {
+const Trending = ({ searchText }) => {
     const [trending, setTrending] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -20,13 +20,13 @@ const Trending = () => {
 
 
     return (
-        <div className='container rounded my-12 py-8 text-primary' >
+        <div className='container rounded my-12 text-primary' >
             <h1 className='text-2xl font-bold py-4'>Trending Coins</h1>
 
             {isLoading ? (<Loader />) : (
-                <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-4' >
+                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-8' >
                     {
-                        trending.map((coin, id) => {
+                        trending && trending.map((coin, id) => {
                             const change = coin.item.data?.price_change_percentage_24h?.usd || 0;
 
                             return (

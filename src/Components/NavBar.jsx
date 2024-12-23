@@ -45,15 +45,15 @@ const NavBar = () => {
           <div className="hidden md:flex items-center space-x-4">
             {user ? (
               <div>
-                <Link className="p-4" href="/account">Account</Link>
+                <Link className="p-4" to="/account">Account</Link>
                 <button onClick={handleSignOut} className="bg-button px-4 py-2 rounded text-buttonText">
                   Sign Out
                 </button>
               </div>
             ) : (
               <div className="flex items-center space-x-2">
-                <Link href="/signin" className="p-2 hover:text-accent">Sign In</Link>
-                <Link href="/signup">
+                  <Link to="/signIn" className="p-2 hover:text-accent">Sign In</Link>
+                <Link to="/signUp">
                   <button className="bg-button px-4 py-2 rounded text-buttonText hover:shadow-md">Sign Up</button>
                 </Link>
               </div>
@@ -100,7 +100,7 @@ const NavBar = () => {
                   <Link className="block px-3 py-2 text-base font-medium" onClick={handleNav} to="/">Home</Link>{" "}
                   {user ? (
                     <>
-                      <Link className="block px-3 py-2" href="/account">
+                      <Link className="block px-3 py-2" to="/account">
                         Account
                       </Link>
                       <button onClick={handleSignOut} className="block bg-button px-3 py-2 rounded text-buttonText">
@@ -109,10 +109,10 @@ const NavBar = () => {
                     </>
                   ) : (
                     <>
-                      <Link className="block px-3 py-2" href="/signin" >
+                      <Link className="block px-3 py-2" to="/signIn" >
                         Sign In
                       </Link>
-                      <Link className="block py-2" href="/signup">
+                      <Link className="block py-2" to="/signUp">
                         <button className="w-full bg-button  px-4 py-2 rounded text-buttonText hover:shadow-md">Sign Up</button>
                       </Link>
                     </>
