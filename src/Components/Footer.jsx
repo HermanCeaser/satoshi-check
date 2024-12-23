@@ -4,9 +4,9 @@ import { AiFillInstagram, AiOutlineInstagram } from "react-icons/ai";
 import { FaFacebook, FaTwitter, FaGithub } from "react-icons/fa";
 const Footer = () => {
   return (
-    <div className="rounded-div mt-8 pt-8 text-primary">
-      <div className="grid md:grid-cols-2">
-        <div className="flex justify-evenly w-full md:max-w-[300px] capitalize">
+    <footer className="shadow text-primary">
+      <div className="container grid md:grid-cols-2 mt-4">
+        <div className="flex justify-around md:justify-evenly w-full md:max-w-[300px] capitalize">
           <div>
             <h2 className="font-bold">support</h2>
             <ul>
@@ -58,11 +58,11 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <p className="text-center text-sm py-4">
+      <p className="border-t text-center text-sm py-2">
         {" "}
         Emeka Manuel 2022. Powered By CoinGecko
       </p>
-    </div>
+    </footer>
   );
 };
 

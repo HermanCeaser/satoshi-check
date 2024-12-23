@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import CoinSearch from '../Components/CoinSearch'
 import Trending from '../Components/Trending'
+import { Loader } from '../Components/Loader'
 
-const Home = ({coins}) => {
+const Home = ({ coins }) => {
   return (
-    <div>
-      <CoinSearch coins = {coins}/>
-      <Trending/>
+    <div className='container mx-auto px-4 py-8'>
+      <Suspense fallback={Loader}>
+        <Trending />
+      </Suspense>
+      <CoinSearch coins={coins} />
     </div>
   )
 }
