@@ -60,7 +60,7 @@ const Footer = () => {
       </div>
       <p className="border-t text-center text-sm py-2">
         {" "}
-        Emeka Manuel 2022. Powered By CoinGecko
+        © Herman Ceaser 2024. Powered By CoinGecko
       </p>
     </footer>
   );
