@@ -26,18 +26,20 @@ const App = () => {
   return (
     <ThemeProvider>
       <AuthContextProvider>
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<Home coins = {coins}/>} />
-        <Route path="/signIn" element={<SignIn />} />
-        <Route path="/signUp" element={<SignUp />} />
-        <Route path="/account" element={<AccountPage />} />
+        <div className="flex flex-col min-h-screen">
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<Home coins={coins} />} />
+            <Route path="/signIn" element={<SignIn />} />
+            <Route path="/signUp" element={<SignUp />} />
+            <Route path="/account" element={<AccountPage />} />
 
-        <Route path="/coin/:coinId" element={<CoinPage/>}>
-        <Route path=":coinId"/>
-        </Route>
-      </Routes>
-      <Footer/>
+            <Route path="/coin/:coinId" element={<CoinPage />}>
+              <Route path=":coinId" />
+            </Route>
+          </Routes>
+          <Footer />
+        </div>
 
       </AuthContextProvider>
     </ThemeProvider>

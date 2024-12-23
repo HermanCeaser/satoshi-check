@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { UserAuth } from "../context/AuthContext";
+import { motion, AnimatePresence } from 'framer-motion'
 
 const NavBar = () => {
   const { user, logOut } = UserAuth();
@@ -24,78 +25,106 @@ const NavBar = () => {
   };
 
   return (
-    <div className="rounded-div flex items-center justify-between h-20 mx-auto font-semibold mt-2">
-      <Link to="/">
-        {" "}
-        <h1 className="text-xl font-bold">Satoshi Check</h1>{" "}
-      </Link>
+    <>
 
-      <div className="hidden md:flex">
-        <ThemeToggle />
-      </div>
+      <nav className="sticky top-0 z-50 w-full border-b bg-primary/95 backdrop-blur supports-[backdrop-filter]:bg-primary/60">
+        <div className="container flex h-14 items-center justify-between mx-auto">
+          <div className="mr-4 flex">
+            <Link className="mr-6 flex items-center space-x-2" to="/">
+              <span className="text-xl font-bold sm:inline-block">
+                Satoshi Check
+              </span>
+            </Link>
+          </div>
 
-     {
-        user?.email ? (
-            <div>
-                <Link className="p-4" to = "/account"> Account</Link>
-                <button className="" onClick={handleSignOut}>Sign Out</button>
-            </div>
-        ) : ( <div className="hidden md:block">
-        <Link className="p-4 hover:text-accent" to="/signIn">
-          Sign In
-        </Link>
-        <Link
-          className="bg-button text-buttonText px-5 py-2 ml-2 rounded-2xl shadow-lg hover:shadow-2xl"
-          to="/signUp"
-        >
-          Sign Up
-        </Link>
-      </div>)
-     }
+          <div className="hidden md:flex ">
+            <ThemeToggle />
+          </div>
 
-      {/*mobile menu icon */}
-      <div className="flex md:hidden cursor-pointer z-10" onClick={handleNav}>
-        {showNav ? <AiOutlineClose size={25} /> : <AiOutlineMenu size={25} />}
-      </div>
+          {/* Auth Links */}
+          <div className="hidden md:flex items-center space-x-4">
+            {user ? (
+              <div>
+                <Link className="p-4" href="/account">Account</Link>
+                <button onClick={handleSignOut} className="bg-button px-4 py-2 rounded text-buttonText">
+                  Sign Out
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center space-x-2">
+                <Link href="/signin" className="p-2 hover:text-accent">Sign In</Link>
+                <Link href="/signup">
+                  <button className="bg-button px-4 py-2 rounded text-buttonText hover:shadow-md">Sign Up</button>
+                </Link>
+              </div>
+            )}
+          </div>
 
-      {/*mobile menu*/}
-      <div
-        className={
-          showNav
-            ? "flex flex-col md:hidden fixed left-0 top-20 items-center justify-between w-full h-[90%] bg-primary ease-in duration-300 z-10 "
-            : "fixed left-[-100%] top-20 h-[90%] flex flex-col items-center justify-between ease-in"
-        }
-      >
-        <ul className="w-full p-4">
-          <li className="border-b py-6">
-            {" "}
-            <Link onClick={handleNav} to="/">Home</Link>{" "}
-          </li>
-          <li className="border-b py-6">
-            {" "}
-            <Link onClick={handleNav} to="/account">Account</Link>{" "}
-          </li>
-          <li className="border-b py-6">
-            {" "}
-            <ThemeToggle />{" "}
-          </li>
-        </ul>
-        <div className="flex flex-col w-full p-4 ">
-          <Link onClick={handleNav} to="/signIn">
-            {" "}
-            <button className="w-full my-2 p-3 bg-primary border border-secondary rounded-2xl shadow-2xl">
-              Sign In
-            </button>{" "}
-          </Link>
-          <Link onClick={handleNav} to="/signUp">
-            {" "}
-            <button className="w-full my-2 p-3 bg-button text-buttonText border border-secondary rounded-2xl shadow-2xl">
-              Sign Up
-            </button>{" "}
-          </Link>
+
+          {/*mobile menu icon */}
+          <div className="flex items-center md:hidden cursor-pointer z-10" onClick={handleNav}>
+            {showNav ? <AiOutlineClose size={25} /> : <AiOutlineMenu size={25} />}
+          </div>
+
+
+
         </div>
-      </div>
-    </div>
+      </nav>
+      {/*mobile menu*/}
+      <AnimatePresence>
+        {showNav && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.5 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-black z-40"
+              onClick={() => setShowNav(false)}
+            />
+            <motion.div
+              initial={{ x: '90%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '90%' }}
+              transition={{ type: 'tween', duration: 0.3 }}
+              className="fixed right-0 top-0 bottom-0 w-3/4 md:w-1/2 lg:w-1/3 bg-primary z-50 overflow-y-auto"
+            >
+              <div className="flex flex-col h-full p-6">
+                <div className="flex justify-end mb-6">
+                  <button size="icon" onClick={() => setShowNav(false)}>
+                    <AiOutlineClose className="h-6 w-6" />
+                  </button>
+                </div>
+                <div className="space-y-6">
+                  <ThemeToggle />
+                  <Link className="block px-3 py-2 text-base font-medium" onClick={handleNav} to="/">Home</Link>{" "}
+                  {user ? (
+                    <>
+                      <Link className="block px-3 py-2" href="/account">
+                        Account
+                      </Link>
+                      <button onClick={handleSignOut} className="block bg-button px-3 py-2 rounded text-buttonText">
+                        Sign Out
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <Link className="block px-3 py-2" href="/signin" >
+                        Sign In
+                      </Link>
+                      <Link className="block py-2" href="/signup">
+                        <button className="w-full bg-button  px-4 py-2 rounded text-buttonText hover:shadow-md">Sign Up</button>
+                      </Link>
+                    </>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          </>
+
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
